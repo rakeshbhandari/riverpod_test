@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final valueProvider = Provider<String>((ref) =>'Rakesh' );
+final valueProvider = Provider.autoDispose<String>((ref) =>'Rakesh' );
 
 class ProviderPage extends ConsumerWidget {
   const ProviderPage({super.key, required this.color});
