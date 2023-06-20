@@ -3,11 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_test/ui/models/product.dart';
 
 final cartNotifierProvider =
-    ChangeNotifierProvider <CartNotifier>(
-        (ref) => CartNotifier());
+    ChangeNotifierProvider<CartNotifier>((ref) => CartNotifier());
 
 class CartNotifier extends ChangeNotifier {
-  List<Product> _cart = [];
+  final List<Product> _cart = [];
 
   List<Product> get cart => _cart;
 

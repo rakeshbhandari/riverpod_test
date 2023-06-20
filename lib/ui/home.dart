@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/change_notifier_page.dart';
 import 'pages/future_provider_page.dart';
 import 'pages/provider_page.dart';
-import 'pages/state_notifier_page.dart';
+// import 'pages/state_notifier_page.dart';
 import 'pages/state_provider_page.dart';
 import 'pages/stream_provider_page.dart';
 import 'widgets/re_button.dart';
@@ -100,7 +100,7 @@ class HomePage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StateNotifierPage(
+                    builder: (context) => ChangeNotifierProviderPage(
                         color:
                             Theme.of(context).colorScheme.secondaryContainer)),
               );

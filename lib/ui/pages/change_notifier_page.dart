@@ -1,12 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_test/ui/models/product.dart';
-import 'package:riverpod_test/ui/pages/data/cart_state_notifier.dart';
+import 'package:riverpod_test/ui/pages/data/cart_notifier.dart';
 
-class StateNotifierProviderPage extends ConsumerWidget {
-  const StateNotifierProviderPage({
+// import 'data/cart_provider.dart';
+
+class ChangeNotifierProviderPage extends ConsumerWidget {
+  const ChangeNotifierProviderPage({
     super.key,
     required this.color,
   });
@@ -15,7 +15,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cart = ref.watch(cartStateNotifierProvider);
+    final CartNotifier = ref.watch(cartNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
@@ -31,17 +31,17 @@ class StateNotifierProviderPage extends ConsumerWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: const Text('Cart'),
+                      title: const Center(child: Text('Cart')),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           // Show the cart contents
-                          ...cart.map((item) => Text(item.title)),
+                          ...CartNotifier.cart.map((item) => Text(item.title)),
                           const SizedBox(height: 16),
                           // Sum the total price of the cart
                           Text(
-                            'Total: \$${cart.fold<double>(0, (sum, item) => sum + item.price)}',
-                            style: Theme.of(context).textTheme.headline6,
+                            'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ],
                       ),
@@ -49,9 +49,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
                         TextButton(
                           onPressed: () {
                             // Clear the cart
-                            ref
-                                .read(cartStateNotifierProvider.notifier)
-                                .clearCart();
+                            ref.read(cartNotifierProvider.notifier).clearCart();
                           },
                           child: const Text('Clear'),
                         ),
@@ -76,7 +74,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
                   minHeight: 16,
                 ),
                 child: Text(
-                  cart.length.toString(),
+                  CartNotifier.cart.length.toString(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -104,7 +102,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
                     onPressed: () {
                       // Add the product to the cart
                       ref
-                          .read(cartStateNotifierProvider.notifier)
+                          .read(cartNotifierProvider.notifier)
                           .addProduct(product);
                     },
                   ),
