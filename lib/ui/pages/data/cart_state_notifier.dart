@@ -1,6 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_test/ui/models/product.dart';
 
+final cartStateNotifierProvider = StateNotifierProvider<CartStateNotifier,List<Product>>((ref){
+  return CartStateNotifier();
+});
+
 class CartStateNotifier extends StateNotifier<List<Product>> {
   CartStateNotifier() : super([]);
 
@@ -8,11 +12,11 @@ class CartStateNotifier extends StateNotifier<List<Product>> {
     state = [...state, product];
   }
 
-  void removeProduct(Product product) {
-    state = state.where((p) => p != product).toList();
-  }
+  // void removeProduct(Product product) {
+  //   state = state.where((p) => p != product).toList();
+  // }
 
-  void clearProduct(Product product) {
+  void clearCart() {
     state = [];
   }
 }
